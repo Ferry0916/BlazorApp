@@ -1,5 +1,41 @@
-﻿<h3>Todo</h3>
+﻿@page "/todo"
+@rendermode InteractiveServer
+
+<style>
+    body {
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/97/John_Cena_2024.jpg');
+        @*background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;*@
+
+        color: chartreuse;
+    }
+</style>
+
+<h3>Todo</h3>
+
+<ul>
+    @foreach (var todo in todos)
+    {
+        <li>@todo.Title</li>
+    }
+</ul>
+<input @bind="newTodo" />
+<button @onclick="AddTodo">Add todo</button>
 
 @code {
+    private List<TodoItem> todos = new();
+    string newTodo = "";
 
+    void AddTodo()
+    {
+        if (!string.IsNullOrWhiteSpace(newTodo))
+        {
+            todos.Add(new TodoItem { Title = newTodo });
+            newTodo = string.Empty;
+        }
+    }
 }
+
+<h1>WHATS UP MADAFAKA</h1>
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/97/John_Cena_2024.jpg" width="300" height="250">
